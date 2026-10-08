@@ -1,0 +1,8 @@
+all:
+  children:
+    practicum_servers:
+      hosts:
+        first_server:
+          ansible_host: <first_ip>
+        second_server:
+          ansible_host: <second_ip> 

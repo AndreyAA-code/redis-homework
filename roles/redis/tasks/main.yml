@@ -1,4 +1,4 @@
--
+---
 - name: Redis installing
   block:
     - name: Check if Redis installed
@@ -31,7 +31,18 @@
         owner: redis
         group: redis
         mode: '0640'
+      notify:
+        - Restart Redis
       when: ansible_os_family == "Debian"
+  
+    - name: Ensure Redis service is started and enabled
+      service:
+        name: redis-server
+        state: started
+        enabled: yes
+      when: ansible_os_family == "Debian"
+
+
   rescue:
     - name: Install error
       debug:

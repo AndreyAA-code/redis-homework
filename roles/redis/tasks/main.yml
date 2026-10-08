@@ -1,0 +1,20 @@
+---
+- name: Redis installing
+  block:
+    - name: Check if Redis installed
+      command: which redis-server
+      ignore_errors: true
+      register: redis_installed
+      changed_when: false
+
+    - name: Install Redis package
+      apt:
+        name: redis-server
+        state: present
+        update_cache: yes
+        cache_valid_time: 3600
+      when: redis_installed.rc != 0 and ansible_os_family == "Debian"
+  rescue:
+    - name: Install error
+      debug:
+        msg: "Redis installing error"

@@ -4,4 +4,3 @@ redis_port: 6379
 redis_dir: /var/lib/redis
 redis_databases: 16
 redis_appendonly: "yes"
-redis_password: "pass"
